@@ -1,14 +1,9 @@
-// import java.util.ArrayList;
-// import java.util.HashMap;
-
 public class Cashier {
     private String name, pwd;
-    // private HashMap<String, Bill> billList;
 
     public Cashier(String name, String pwd) {
         this.name = name;
         this.pwd = pwd;
-        // this.billList = new HashMap<>();
     }
 
     public String getName() {

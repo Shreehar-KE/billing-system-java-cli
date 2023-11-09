@@ -9,6 +9,10 @@ public class Inventory {
         this.productsList = new HashMap<>();
     }
 
+    public boolean isEmpty() {
+        return this.productsList.isEmpty();
+    }
+
     public void addProduct(String prodName, String prodId, int tax, double unitPrice, int quantity) {
         Product prod = new Product(prodName, prodId, tax, unitPrice);
         this.productsList.put(prodId, prod);
@@ -17,12 +21,6 @@ public class Inventory {
 
     public Product getProduct(String prodId) {
         return this.productsList.get(prodId);
-        // if (this.productsList.containsKey(prodId)) {
-        // return this.productsList.get(prodId);
-        // } else {
-        // System.out.println("Product doesn't exist...!\n");
-        // return null;
-        // }
     }
 
     public int getQuantity(String prodId) {
@@ -45,22 +43,32 @@ public class Inventory {
     }
 
     public void displayInventory() {
-        System.out.println();
+        System.out.println("----------------------------------------");
         System.out.println("Name\tID\tTax\tPrice\tQuantity");
         System.out.println("----\t--\t---\t-----\t--------");
         for (Product p : this.productsList.values()) {
             int q = this.quantities.get(p.getId());
             String op = p.getName() + "\t";
             op += p.getId() + "\t";
-            op += p.getTax() + "%\t" + p.getPrice() + "\t";
+            op += p.getTax() + "%\t" + String.format("%.2f", p.getPrice()) + "\t";
             op += q;
             System.out.println(op);
             op = "";
         }
-        System.out.println();
+        System.out.println("----------------------------------------\n");
     }
 
     public boolean containsProduct(String prodId) {
         return this.productsList.containsKey(prodId);
+    }
+
+    public boolean checkQuantity(String prodID, int q) {
+        int temp = this.getQuantity(prodID);
+        if (temp < q) {
+            System.out.println("Requested quantity not available, only " + temp + " left...!\n");
+            return false;
+        } else {
+            return true;
+        }
     }
 }

@@ -20,6 +20,10 @@ public class Bill {
         return this.cashierName;
     }
 
+    public boolean isEmpty() {
+        return this.productList.isEmpty();
+    }
+
     public void addProduct(Product product, int quantity) {
         ArrayList<Object> temp = new ArrayList<>();
         temp.add(product);
@@ -27,16 +31,16 @@ public class Bill {
         this.productList.put(product.getId(), temp);
     }
 
-    public int getQuantity(String pID) {
-        return (int) this.productList.get(pID).get(1);
+    public int getQuantity(String prodId) {
+        return (int) this.productList.get(prodId).get(1);
     }
 
     public boolean containsProduct(String prodId) {
         return this.productList.containsKey(prodId);
     }
 
-    public void deleteProduct(String pID) {
-        this.productList.remove(pID);
+    public void deleteProduct(String prodId) {
+        this.productList.remove(prodId);
     }
 
     public double getTotalAmount() {
@@ -54,14 +58,14 @@ public class Bill {
     private double calcTotalPrice(ArrayList<Object> arr) {
         int q = (int) arr.get(1);
         Product p = (Product) arr.get(0);
-        double amount = (p.getPrice() + (p.getPrice() * (p.getTax() / 100))) * q;
+        double amount = (p.getPrice() + (p.getPrice() * (p.getTax() / 100.0))) * q;
         return amount;
     }
 
     public void displayBill() {
-        System.out.println();
+        System.out.println("-------------------------------------------------------------------");
         System.out.println("Bill No: " + this.billNo + "\t\tCashier Name: " + this.cashierName);
-        System.out.println("------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------");
         System.out.println("Name\tID\tTax\tUnit Price\tQuantity\tTotal Price");
         System.out.println("----\t--\t---\t----------\t--------\t-----------");
         for (String k : this.productList.keySet()) {
@@ -70,13 +74,13 @@ public class Bill {
             String res = p.getName() + "\t"
                     + k + "\t"
                     + p.getTax() + "\t"
-                    + String.format("%.2f", p.getPrice()) + "\t"
-                    + q + "\t"
+                    + String.format("%.2f", p.getPrice()) + "\t\t"
+                    + q + "\t\t"
                     + String.format("%.2f", this.calcTotalPrice(this.productList.get(k)));
             System.out.println(res);
         }
-        System.out.println("------------------------------------------------");
-        System.out.println("Total Amount:\t" + this.getTotalAmount());
-        System.out.println();
+        System.out.println("-------------------------------------------------------------------");
+        System.out.println("Total Amount:\t" + String.format("%.2f", this.getTotalAmount()));
+        System.out.println("-------------------------------------------------------------------\n");
     }
 }
