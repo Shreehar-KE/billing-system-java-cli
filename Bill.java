@@ -3,15 +3,21 @@ import java.util.HashMap;
 
 public class Bill {
     private String billNo;
+    private String cashierName;
     private HashMap<String, ArrayList<Object>> productList;
 
-    public Bill(String billNo) {
+    public Bill(String billNo, String cashierName) {
         this.billNo = billNo;
+        this.cashierName = cashierName;
         this.productList = new HashMap<>();
     }
 
     public String getBillNo() {
         return this.billNo;
+    }
+
+    public String getCashierName() {
+        return this.cashierName;
     }
 
     public void addProduct(Product product, int quantity) {
@@ -21,20 +27,16 @@ public class Bill {
         this.productList.put(product.getId(), temp);
     }
 
-    public void updateProduct(Product product, int quantity) {
-        if (this.productList.containsKey(product.getId())) {
-            addProduct(product, quantity);
-        } else {
-            System.out.println("Update Unsuccessfull, product doesn't exist...!");
-        }
+    public int getQuantity(String pID) {
+        return (int) this.productList.get(pID).get(1);
     }
 
-    public void deleteProduct(Product product) {
-        if (this.productList.containsKey(product.getId())) {
-            this.productList.remove(product.getId());
-        } else {
-            System.out.println("Delete Unsuccessfull, product doesn't exist...!");
-        }
+    public boolean containsProduct(String prodId) {
+        return this.productList.containsKey(prodId);
+    }
+
+    public void deleteProduct(String pID) {
+        this.productList.remove(pID);
     }
 
     public double getTotalAmount() {
@@ -58,7 +60,7 @@ public class Bill {
 
     public void displayBill() {
         System.out.println();
-        System.out.println("Bill No:\t" + this.billNo);
+        System.out.println("Bill No: " + this.billNo + "\t\tCashier Name: " + this.cashierName);
         System.out.println("------------------------------------------------");
         System.out.println("Name\tID\tTax\tUnit Price\tQuantity\tTotal Price");
         System.out.println("----\t--\t---\t----------\t--------\t-----------");

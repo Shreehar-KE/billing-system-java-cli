@@ -31,7 +31,7 @@ public class Cashier {
 
         Cashier comparedCashier = (Cashier) comparedObject;
 
-        if (this.name.equals(comparedCashier.name)) {
+        if (this.name.equals(comparedCashier.getName())) {
             return true;
         }
         return false;

@@ -16,12 +16,13 @@ public class Inventory {
     }
 
     public Product getProduct(String prodId) {
-        if (this.productsList.containsKey(prodId)) {
-            return this.productsList.get(prodId);
-        } else {
-            System.out.println("Product doesn't exist...!");
-            return null;
-        }
+        return this.productsList.get(prodId);
+        // if (this.productsList.containsKey(prodId)) {
+        // return this.productsList.get(prodId);
+        // } else {
+        // System.out.println("Product doesn't exist...!\n");
+        // return null;
+        // }
     }
 
     public int getQuantity(String prodId) {
