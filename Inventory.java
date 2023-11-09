@@ -29,21 +29,18 @@ public class Inventory {
     }
 
     public void updateStock(String prodId, int quantity) {
-        if (this.quantities.containsKey(prodId)) {
-            this.quantities.put(prodId, quantity);
-        } else {
-            System.out.println("Update Unsuccessfull, Product doesn't exist...!");
-        }
+        this.quantities.put(prodId, quantity);
     }
 
     public void deleteProduct(String prodId) {
-        if (this.productsList.containsKey(prodId)) {
-            this.productsList.remove(prodId);
-            this.quantities.remove(prodId);
-        } else {
-            System.out.println("Delete Unsuccessfull, Product doesn't exist...!");
-        }
+        this.productsList.remove(prodId);
+        this.quantities.remove(prodId);
+    }
 
+    public String displayStock(String prodId) {
+        return "Name: " + this.getProduct(prodId).getName()
+                + "\nQuantity: " + this.getQuantity(prodId)
+                + "\n";
     }
 
     public void displayInventory() {

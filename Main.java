@@ -127,7 +127,7 @@ public class Main {
             } else if (ip == 3) {
                 break;
             } else {
-                System.out.println("Wrong Input, Try Again...!");
+                System.out.println("Wrong Input, Try Again...\n!");
             }
         }
     }
@@ -135,7 +135,7 @@ public class Main {
     public static void stockEntry() {
         Scanner s = new Scanner(System.in);
         while (true) {
-            System.out.println("1.Add Stock\n2.Update Stock\n3.Delete Stock\n4.Display Stock\n5.Exit");
+            System.out.println("1.Add Stock\n2.Update Stock\n3.Delete Stock\n4.Display Inventory\n5.Exit\n");
             System.out.print("------>");
             int ip = s.nextInt();
             if (ip == 1) {
@@ -149,7 +149,7 @@ public class Main {
             } else if (ip == 5) {
                 break;
             } else {
-                System.out.println("Wrong Input, Try Again...!");
+                System.out.println("Wrong Input, Try Again...!\n");
             }
         }
     }
@@ -167,42 +167,55 @@ public class Main {
             System.out.print("Enter Product's Tax: ");
             int pTax = s.nextInt();
             System.out.print("Enter Product's Price: ");
-            double pPrice = s.nextDouble();
-            System.out.println("Enter Initial Quantity: ");
+            double pPrice = s.nextDouble();// doubt
+            System.out.print("Enter Initial Quantity: ");
             int q = s.nextInt();
             inventory.addProduct(pName, pID, pTax, pPrice, q);
             --num;
-            System.out.println();
+            System.out.println(pName + " (" + pID + ") Added Successfully...!\n");
         }
     }
 
     public static void updateStock() {
         Scanner s = new Scanner(System.in);
         System.out.print("No. of products to be updated? ");
-        System.out.println();
         int num = s.nextInt();
+        System.out.println();
         while (num > 0) {
             System.out.print("Enter Product's ID: ");
             String pID = s.nextLine();
-            System.out.println("Enter New Quantity: ");
+            System.out.println();
+            if (!inventory.containsProduct(pID)) {
+                System.out.println("Product doesn't exists, Try Again...!\n");
+                continue;
+            }
+            System.out.println(inventory.displayStock(pID));
+
+            System.out.print("Enter New Quantity: ");
             int q = s.nextInt();
+            System.out.println();
             inventory.updateStock(pID, q);
             --num;
-            System.out.println();
+            System.out.println("Updated Successfully, New Stock: \n" + inventory.displayStock(pID));
         }
     }
 
     public static void deleteStock() {
         Scanner s = new Scanner(System.in);
         System.out.print("No. of products to be deleted? ");
-        System.out.println();
         int num = s.nextInt();
+        System.out.println();
         while (num > 0) {
             System.out.print("Enter Product's ID: ");
             String pID = s.nextLine();
+            System.out.println();
+            if (!inventory.containsProduct(pID)) {
+                System.out.println("Product doesn't exists, Try Again...!\n");
+                continue;
+            }
             inventory.deleteProduct(pID);
             --num;
-            System.out.println();
+            System.out.println(inventory.getProduct(pID).getName() + " Deleted Successfully...!\n");
         }
     }
 
