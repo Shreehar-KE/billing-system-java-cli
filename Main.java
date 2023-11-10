@@ -130,7 +130,7 @@ public class Main {
                 stockEntry();
             } else if (ip == 2) {
                 if ((billList.size() == 0 && inventory.isEmpty())) {
-                    System.out.println("Function not allowed at this moment\n");
+                    System.out.println("Function not allowed at this moment...!\n");
                     continue;
                 }
                 billEntry(cname);
@@ -212,7 +212,7 @@ public class Main {
                 break;
             }
             System.out.println();
-            if (!inventory.isEmpty() && !inventory.containsProduct(prodId)) {
+            if (!inventory.containsProduct(prodId)) {
                 System.out.println("Invalid Product ID, Try Again...!\n");
                 continue;
             }
@@ -238,7 +238,7 @@ public class Main {
                 break;
             }
             System.out.println();
-            if (!inventory.isEmpty() && !inventory.containsProduct(prodId)) {
+            if (!inventory.containsProduct(prodId)) {
                 System.out.println("Invalid Product ID, Try Again...!\n");
                 continue;
             }
