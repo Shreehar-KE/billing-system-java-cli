@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -95,7 +96,6 @@ public class Main {
         while (true) {
             System.out.print("Cashier Name: ");
             String name = scan.nextLine();
-            System.out.println();
             if (name.equals("DONE")) {
                 break;
             }
@@ -117,6 +117,20 @@ public class Main {
     }
 
     private static void generateReport() {
+        try {
+            PrintWriter pw = new PrintWriter("report.txt");
+            pw.println("Welcome to Billing System...!");
+            pw.println("-----------------------------\n");
+            pw.println("Cashier Report:");
+            for (Cashier cashier : cashierList) {
+                pw.println(cashier.getName());
+            }
+            System.out.println("Report has been generated successfully...!\n");
+            pw.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error in Report Generation...!");
+        }
 
     }
 

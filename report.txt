@@ -1,0 +1,7 @@
+Welcome to Billing System...!
+-----------------------------
+
+Cashier Report:
+Cashier1
+Cashier2
+Cashier3
